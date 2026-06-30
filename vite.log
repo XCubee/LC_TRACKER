@@ -1,0 +1,16 @@
+
+> lc-leaderboard@1.0.0 dev
+> vite --host 127.0.0.1
+
+
+  [32m[1mVITE[22m v5.4.21[39m  [2mready in [0m[1m934[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m5173[22m/[39m
+[2m5:39:09 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/index.css, /src/components/JoinForm.jsx, /src/components/LeaderboardTable.jsx, /src/components/ControlPanel.jsx[22m
+[2m5:39:09 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/index.css[22m
+[2m5:39:09 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/index.css, /src/components/JoinForm.jsx, /src/components/LeaderboardTable.jsx[22m
+[2m5:39:09 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/index.css, /src/components/ControlPanel.jsx[22m
+[2m5:47:41 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/index.css, /src/components/JoinForm.jsx, /src/components/LeaderboardTable.jsx[22m
+[2m5:56:45 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/index.css, /src/components/JoinForm.jsx, /src/components/LeaderboardTable.jsx[22m
+[2m5:57:14 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/index.css, /src/components/JoinForm.jsx, /src/components/LeaderboardTable.jsx[22m
+[2m5:57:14 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/LeaderboardTable.jsx, /src/index.css[22m
