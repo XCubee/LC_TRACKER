@@ -6,7 +6,6 @@ import { fetchSettings } from './services/settings';
 import { rankStudents } from './utils/scoring';
 import { supabase, supabaseConfigError } from './services/supabaseClient';
 import JoinForm from './components/JoinForm';
-import ControlPanel from './components/ControlPanel';
 import Tabs from './components/Tabs';
 import LeaderboardTable from './components/LeaderboardTable';
 
@@ -86,23 +85,23 @@ export default function App() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
+    <div className="min-h-screen bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950 text-slate-100">
       <div className="max-w-5xl mx-auto px-4 py-8">
         <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
           <div className="flex items-center gap-3">
-            <div className="bg-indigo-500/10 p-2.5 rounded-xl">
+            <div className="bg-indigo-500/15 p-2.5 rounded-xl">
               <Code2 className="w-7 h-7 text-indigo-400" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold tracking-tight">LeetCode Class Leaderboard</h1>
-              <p className="text-slate-500 text-sm">Self-serve, live, and updates for everyone in real time</p>
+              <h1 className="text-2xl font-bold tracking-tight text-slate-100">LeetCode Class Leaderboard</h1>
+              <p className="text-slate-400 text-sm">Self-serve, live, and updates for everyone in real time</p>
             </div>
           </div>
 
           <button
             onClick={handleRefreshAll}
             disabled={syncing}
-            className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-800 disabled:text-slate-500 transition px-4 py-2 rounded-lg font-medium text-sm self-start sm:self-auto"
+            className="flex items-center gap-2 bg-indigo-500 hover:bg-indigo-400 disabled:bg-slate-700 disabled:text-slate-400 transition px-4 py-2 rounded-lg font-medium text-sm self-start sm:self-auto text-white"
           >
             <RefreshCw className={`w-4 h-4 ${syncing ? 'animate-spin' : ''}`} />
             {syncing ? 'Refreshing...' : 'Refresh All'}
@@ -110,8 +109,6 @@ export default function App() {
         </header>
 
         <JoinForm onJoined={loadData} />
-
-        <ControlPanel weights={weights} setWeights={setWeights} />
 
         <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
 
@@ -122,11 +119,11 @@ export default function App() {
         )}
 
         {loading ? (
-          <div className="text-center py-20 text-slate-500">Loading leaderboard...</div>
+          <div className="text-center py-20 text-slate-400">Loading leaderboard...</div>
         ) : (
           <>
             <LeaderboardTable students={rankedStudents} activeTab={activeTab} onChanged={loadData} />
-            <div className="flex flex-wrap items-center justify-between gap-2 mt-4 text-xs text-slate-500">
+            <div className="flex flex-wrap items-center justify-between gap-2 mt-4 text-xs text-slate-400">
               <span>{lastUpdated && `Last refreshed ${lastUpdated.toLocaleTimeString()}`}</span>
               <span>{students.length} student{students.length === 1 ? '' : 's'} on the board</span>
             </div>

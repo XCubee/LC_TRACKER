@@ -1,11 +1,10 @@
 // src/components/LeaderboardTable.jsx
-import { Trophy, AlertCircle, X } from 'lucide-react';
-import { removeStudent } from '../services/students';
+import { Trophy, AlertCircle } from 'lucide-react';
 
 const RANK_STYLES = {
-  1: { row: 'bg-gradient-to-r from-yellow-500/15 to-transparent border-l-4 border-yellow-400', badge: 'text-yellow-400' },
-  2: { row: 'bg-gradient-to-r from-slate-400/15 to-transparent border-l-4 border-slate-300', badge: 'text-slate-300' },
-  3: { row: 'bg-gradient-to-r from-orange-600/15 to-transparent border-l-4 border-orange-500', badge: 'text-orange-500' },
+  1: { row: 'bg-gradient-to-r from-amber-400/20 via-yellow-300/10 to-transparent border-l-4 border-amber-400 shadow-[inset_0_0_20px_rgba(251,191,36,0.12)]', badge: 'text-amber-300' },
+  2: { row: 'bg-gradient-to-r from-slate-400/20 via-slate-300/10 to-transparent border-l-4 border-slate-300 shadow-[inset_0_0_20px_rgba(203,213,225,0.1)]', badge: 'text-slate-300' },
+  3: { row: 'bg-gradient-to-r from-orange-400/20 via-orange-300/10 to-transparent border-l-4 border-orange-400 shadow-[inset_0_0_20px_rgba(249,115,22,0.12)]', badge: 'text-orange-300' },
 };
 
 const SCOPE_COLUMNS = {
@@ -26,33 +25,26 @@ function RankCell({ rank }) {
   );
 }
 
-export default function LeaderboardTable({ students, activeTab, onChanged }) {
+export default function LeaderboardTable({ students, activeTab }) {
   const cols = SCOPE_COLUMNS[activeTab];
 
-  async function handleRemove(id, username) {
-    if (!confirm(`Remove ${username} from the leaderboard?`)) return;
-    await removeStudent(id);
-    onChanged?.();
-  }
-
   return (
-    <div className="overflow-x-auto rounded-xl border border-slate-800">
+    <div className="overflow-x-auto rounded-xl border border-slate-700 bg-slate-900/90 shadow-2xl shadow-slate-950/40">
       <table className="w-full text-sm text-left">
-        <thead className="bg-slate-900 text-slate-400 uppercase text-xs tracking-wider">
+        <thead className="bg-slate-800/90 text-slate-300 uppercase text-xs tracking-wider">
           <tr>
-            <th className="px-4 py-3">Rank</th>
-            <th className="px-4 py-3">Student</th>
-            <th className="px-4 py-3 text-center text-emerald-400">Easy</th>
-            <th className="px-4 py-3 text-center text-amber-400">Medium</th>
-            <th className="px-4 py-3 text-center text-rose-400">Hard</th>
-            <th className="px-4 py-3 text-right">{cols.metricLabel}</th>
-            <th className="px-2 py-3"></th>
+            <th className="px-4 py-3 font-semibold">Rank</th>
+            <th className="px-4 py-3 font-semibold">Student</th>
+            <th className="px-4 py-3 text-center font-semibold text-emerald-400">Easy</th>
+            <th className="px-4 py-3 text-center font-semibold text-amber-400">Medium</th>
+            <th className="px-4 py-3 text-center font-semibold text-rose-400">Hard</th>
+            <th className="px-4 py-3 text-right font-semibold">{cols.metricLabel}</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-slate-800">
           {students.length === 0 && (
             <tr>
-              <td colSpan={7} className="px-4 py-10 text-center text-slate-500">
+              <td colSpan={6} className="px-4 py-10 text-center text-slate-500">
                 No students yet — be the first to join above!
               </td>
             </tr>
@@ -66,17 +58,17 @@ export default function LeaderboardTable({ students, activeTab, onChanged }) {
                   ? student.hasWeekDifficultyBreakdown
                   : true;
             return (
-              <tr key={student.id} className={`${rowStyle} hover:bg-slate-800/40 transition-colors group`}>
+              <tr key={student.id} className={`${rowStyle} hover:bg-slate-800/70 transition-colors`}>
                 <td className="px-4 py-3">
                   <RankCell rank={student.rank} />
                 </td>
-                <td className="px-4 py-3 font-medium text-slate-100">
+                <td className="px-4 py-3 font-semibold text-slate-100">
                   <div className="flex items-center gap-2">
                     <a
                       href={`https://leetcode.com/${student.username}/`}
                       target="_blank"
                       rel="noreferrer"
-                      className="hover:text-indigo-400 transition"
+                      className="text-slate-100 hover:text-indigo-400 transition font-semibold"
                     >
                       {student.displayName || student.username}
                     </a>
@@ -87,20 +79,11 @@ export default function LeaderboardTable({ students, activeTab, onChanged }) {
                     )}
                   </div>
                 </td>
-                <td className="px-4 py-3 text-center text-emerald-300">{hasDifficultyBreakdown ? student[cols.easy] : '-'}</td>
-                <td className="px-4 py-3 text-center text-amber-300">{hasDifficultyBreakdown ? student[cols.medium] : '-'}</td>
-                <td className="px-4 py-3 text-center text-rose-300">{hasDifficultyBreakdown ? student[cols.hard] : '-'}</td>
+                <td className="px-4 py-3 text-center font-semibold text-emerald-300">{hasDifficultyBreakdown ? student[cols.easy] : '-'}</td>
+                <td className="px-4 py-3 text-center font-semibold text-amber-300">{hasDifficultyBreakdown ? student[cols.medium] : '-'}</td>
+                <td className="px-4 py-3 text-center font-semibold text-rose-300">{hasDifficultyBreakdown ? student[cols.hard] : '-'}</td>
                 <td className="px-4 py-3 text-right font-bold text-slate-100">
                   {Number.isFinite(student.activeValue) ? student.activeValue : 0}
-                </td>
-                <td className="px-2 py-3">
-                  <button
-                    onClick={() => handleRemove(student.id, student.username)}
-                    className="opacity-0 group-hover:opacity-100 transition text-slate-600 hover:text-red-400"
-                    title="Remove from leaderboard"
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
                 </td>
               </tr>
             );
